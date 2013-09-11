@@ -1,0 +1,74 @@
+void warning()
+{
+  digitalWrite(grn, LOW);
+  digitalWrite(yel, LOW);
+  digitalWrite(red, HIGH);
+  delay(100);
+  digitalWrite(red, LOW);
+  delay(100);
+}
+
+void safe()
+{
+  digitalWrite(grn, HIGH);
+  digitalWrite(red, LOW);
+  digitalWrite(yel, LOW);
+}
+
+void caution()
+{
+  digitalWrite(grn, HIGH);
+  digitalWrite(yel, HIGH);
+  digitalWrite(red, LOW);
+}
+
+void off()
+{
+  digitalWrite(grn, LOW);
+  digitalWrite(red, LOW);
+  digitalWrite(yel, LOW);
+}
+
+void test()
+{
+  digitalWrite(red, HIGH);
+  digitalWrite(yel, HIGH);
+  digitalWrite(grn, HIGH);
+  delay(100);
+  digitalWrite(red, LOW);
+  digitalWrite(yel, LOW);
+  digitalWrite(grn, LOW);
+  delay(100);
+  digitalWrite(red, HIGH);
+  digitalWrite(yel, HIGH);
+  digitalWrite(grn, HIGH);
+  delay(100);
+  digitalWrite(red, LOW);
+  digitalWrite(yel, LOW);
+  digitalWrite(grn, LOW);
+  delay(100);
+  digitalWrite(red, HIGH);
+  digitalWrite(yel, HIGH);
+  digitalWrite(grn, HIGH);
+  delay(100);
+  digitalWrite(red, LOW);
+  digitalWrite(yel, LOW);
+  digitalWrite(grn, LOW);
+  delay(100);
+  digitalWrite(red, HIGH);
+  digitalWrite(yel, HIGH);
+  digitalWrite(grn, HIGH);
+  delay(100);
+  digitalWrite(red, LOW);
+  digitalWrite(yel, LOW);
+  digitalWrite(grn, LOW);
+  delay(100);
+  digitalWrite(red, HIGH);
+  digitalWrite(yel, HIGH);
+  digitalWrite(grn, HIGH);
+  delay(100);
+  digitalWrite(red, LOW);
+  digitalWrite(yel, LOW);
+  digitalWrite(grn, LOW);
+  delay(100);
+}

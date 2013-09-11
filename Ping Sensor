@@ -1,0 +1,9 @@
+void pingSensor()
+{
+  pinMode(ping, OUTPUT);
+  digitalWrite(ping, LOW);
+  delayMicroseconds(2);
+  digitalWrite(ping, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(ping, LOW);
+}

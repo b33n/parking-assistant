@@ -1,0 +1,105 @@
+//Karly's Parking Assistant that keeps my garage walls hole free!!!  =]
+
+int red = 9;
+int yel = 10;
+int grn = 11;
+const int ping = 2;
+
+void setup()
+{
+  Serial.begin(9600);
+  
+  pinMode(red, OUTPUT);
+  pinMode(yel, OUTPUT);
+  pinMode(grn, OUTPUT);
+  //pinMode(ping, OUTPUT);
+  
+  digitalWrite(red, HIGH);
+  delay(1000);
+  digitalWrite(yel, HIGH);
+  delay(1000);
+  digitalWrite(grn, HIGH);
+  delay(3000);
+  digitalWrite(red, LOW);
+  delay(1000);
+  digitalWrite(yel, LOW);
+  delay(1000);
+  digitalWrite(grn, LOW);
+  delay(500);
+}
+  
+void loop()
+  {
+  long duration, inches, cm;
+  
+  pinMode(ping, OUTPUT);
+  digitalWrite(ping, LOW);
+  delayMicroseconds(2);
+  digitalWrite(ping, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(ping, LOW);
+  
+  pinMode(ping, INPUT);
+  duration = pulseIn(ping, HIGH);
+  
+  inches = microsecondsToInches(duration);
+  //cm = microsecondsToCentimeters(duration);
+  
+  Serial.print(inches);
+  Serial.print("in, ");
+  Serial.print(duration);
+  Serial.print("dr");
+  Serial.println();
+  
+  if (inches <= 36 && inches >= 24)
+  {
+    safe();
+  }
+  else if (inches <= 24 && inches >= 12)
+  {
+    caution();
+  }
+  else if (inches < 12)
+  {
+    warning();
+  }
+  else
+  {
+    digitalWrite(grn, LOW);
+    digitalWrite(red, LOW);
+    digitalWrite(yel, LOW);
+  }
+  
+  delay(100);
+  }
+  
+  long microsecondsToInches(long microseconds)
+{
+  return microseconds / 74 / 2;
+}
+
+/*long microsecondsToCentimeters(long microseconds)
+{
+  return microseconds / 29 / 2;
+}*/
+
+void warning(){
+  digitalWrite(grn, LOW);
+  digitalWrite(yel, LOW);
+  digitalWrite(red, HIGH);
+  delay(100);
+  digitalWrite(red, LOW);
+  delay(100);
+}
+
+void safe(){
+  digitalWrite(grn, HIGH);
+  digitalWrite(red, LOW);
+  digitalWrite(yel, LOW);
+}
+
+void caution(){
+  digitalWrite(grn, HIGH);
+  digitalWrite(yel, HIGH);
+  digitalWrite(red, LOW);
+}

@@ -1,105 +1,79 @@
 //Karly's Parking Assistant that keeps my garage walls hole free!!!  =]
 
-int red = 9;
-int yel = 10;
-int grn = 11;
-const int ping = 2;
+#include <Servo.h>
+#include <EEPROM.h>
+ 
+Servo myservo;  // create servo object to control a servo 
 
-void setup()
+const int buttonPin = 3;
+const int button = 2;
+const int ping = 9;
+const int green = 7;
+int potpin = A0;  // analog pin used to connect the potentiometer
+int val;    // variable to read the value from the analog pin 
+int buttonServo = 0;
+int buttonRange = 0;
+int servoAngle = 0;
+int rangeVal = 0;
+int addr1 = 0;
+int addr2 = 0;
+ 
+void setup() 
 {
-  Serial.begin(9600);
-  
-  pinMode(red, OUTPUT);
-  pinMode(yel, OUTPUT);
-  pinMode(grn, OUTPUT);
-  //pinMode(ping, OUTPUT);
-  
-  digitalWrite(red, HIGH);
-  delay(1000);
-  digitalWrite(yel, HIGH);
-  delay(1000);
-  digitalWrite(grn, HIGH);
-  delay(3000);
-  digitalWrite(red, LOW);
-  delay(1000);
-  digitalWrite(yel, LOW);
-  delay(1000);
-  digitalWrite(grn, LOW);
-  delay(500);
-}
-  
-void loop()
-  {
-  long duration, inches, cm;
-  
-  pinMode(ping, OUTPUT);
-  digitalWrite(ping, LOW);
-  delayMicroseconds(2);
-  digitalWrite(ping, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(ping, LOW);
-  
+  Serial.begin(9600); 
+  myservo.attach(10);  // attaches the servo on pin 9 to the servo object
+  pinMode(buttonPin, INPUT);
+  pinMode(button, INPUT);
   pinMode(ping, INPUT);
-  duration = pulseIn(ping, HIGH);
-  
+  pinMode(green, OUTPUT);
+
+  test();  
+} 
+ 
+void loop() 
+{
+  buttonServo = digitalRead(buttonPin);
+  buttonRange = digitalRead(button);
+  val = analogRead(potpin);            // reads the value of the potentiometer (value between 0 and 1023) 
+  val = map(val, 0, 1023, 0, 179);     // scale it to use it with the servo (value between 0 and 180) 
+  servoAngle = EEPROM.read(addr1);
+  myservo.write(servoAngle);
+    
+  long duration, inches;  
+  pingSensor();  
+  pinMode(ping, INPUT);
+  duration = pulseIn(ping, HIGH);  
   inches = microsecondsToInches(duration);
-  //cm = microsecondsToCentimeters(duration);
-  
+    
   Serial.print(inches);
   Serial.print("in, ");
   Serial.print(duration);
   Serial.print("dr");
   Serial.println();
   
-  if (inches <= 36 && inches >= 24)
+  if (buttonServo == HIGH)
+{  
+  myservo.write(val);  // sets the servo position according to the scaled value 
+  delay(15);           // waits for the servo to get there 
+  EEPROM.write(addr1, val);
+}
+  else if (buttonRange == HIGH)
+  {
+    EEPROM.write(addr2, inches);
+  }
+  else if (inches <= addr2)
   {
     safe();
   }
-  else if (inches <= 24 && inches >= 12)
+    
+  else 
   {
-    caution();
+    off();
   }
-  else if (inches < 12)
-  {
-    warning();
-  }
-  else
-  {
-    digitalWrite(grn, LOW);
-    digitalWrite(red, LOW);
-    digitalWrite(yel, LOW);
-  }
-  
-  delay(100);
-  }
-  
+//delay(50);
+}
+
   long microsecondsToInches(long microseconds)
 {
   return microseconds / 74 / 2;
-}
-
-/*long microsecondsToCentimeters(long microseconds)
-{
-  return microseconds / 29 / 2;
-}*/
-
-void warning(){
-  digitalWrite(grn, LOW);
-  digitalWrite(yel, LOW);
-  digitalWrite(red, HIGH);
-  delay(100);
-  digitalWrite(red, LOW);
-  delay(100);
-}
-
-void safe(){
-  digitalWrite(grn, HIGH);
-  digitalWrite(red, LOW);
-  digitalWrite(yel, LOW);
-}
-
-void caution(){
-  digitalWrite(grn, HIGH);
-  digitalWrite(yel, HIGH);
-  digitalWrite(red, LOW);
 }

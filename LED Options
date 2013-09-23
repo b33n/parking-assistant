@@ -1,74 +1,62 @@
-void warning()
+void off()
 {
-  digitalWrite(grn, LOW);
-  digitalWrite(yel, LOW);
-  digitalWrite(red, HIGH);
-  delay(100);
-  digitalWrite(red, LOW);
-  delay(100);
+  digitalWrite(green, LOW);
 }
 
 void safe()
 {
-  digitalWrite(grn, HIGH);
-  digitalWrite(red, LOW);
-  digitalWrite(yel, LOW);
+  digitalWrite(green, HIGH);
 }
 
-void caution()
+void warning()
 {
-  digitalWrite(grn, HIGH);
-  digitalWrite(yel, HIGH);
-  digitalWrite(red, LOW);
-}
-
-void off()
-{
-  digitalWrite(grn, LOW);
-  digitalWrite(red, LOW);
-  digitalWrite(yel, LOW);
+  digitalWrite(green, HIGH);
+  delay(50);
+  digitalWrite(green, LOW);
+  delay(50);
 }
 
 void test()
 {
-  digitalWrite(red, HIGH);
-  digitalWrite(yel, HIGH);
-  digitalWrite(grn, HIGH);
+  digitalWrite(green, HIGH);
   delay(100);
-  digitalWrite(red, LOW);
-  digitalWrite(yel, LOW);
-  digitalWrite(grn, LOW);
+  digitalWrite(green, LOW);
   delay(100);
-  digitalWrite(red, HIGH);
-  digitalWrite(yel, HIGH);
-  digitalWrite(grn, HIGH);
+  digitalWrite(green, HIGH);
   delay(100);
-  digitalWrite(red, LOW);
-  digitalWrite(yel, LOW);
-  digitalWrite(grn, LOW);
+  digitalWrite(green, LOW);
+  delay(100);  
+  digitalWrite(green, HIGH);
   delay(100);
-  digitalWrite(red, HIGH);
-  digitalWrite(yel, HIGH);
-  digitalWrite(grn, HIGH);
+  digitalWrite(green, LOW);
+  delay(100);  
+  digitalWrite(green, HIGH);
   delay(100);
-  digitalWrite(red, LOW);
-  digitalWrite(yel, LOW);
-  digitalWrite(grn, LOW);
+  digitalWrite(green, LOW);
+  delay(100);  
+  digitalWrite(green, HIGH);
   delay(100);
-  digitalWrite(red, HIGH);
-  digitalWrite(yel, HIGH);
-  digitalWrite(grn, HIGH);
+  digitalWrite(green, LOW);
+  delay(100);  
+  digitalWrite(green, HIGH);
   delay(100);
-  digitalWrite(red, LOW);
-  digitalWrite(yel, LOW);
-  digitalWrite(grn, LOW);
+  digitalWrite(green, LOW);
+  delay(100);  
+  digitalWrite(green, HIGH);
   delay(100);
-  digitalWrite(red, HIGH);
-  digitalWrite(yel, HIGH);
-  digitalWrite(grn, HIGH);
+  digitalWrite(green, LOW);
+  delay(100);  
+  digitalWrite(green, HIGH);
   delay(100);
-  digitalWrite(red, LOW);
-  digitalWrite(yel, LOW);
-  digitalWrite(grn, LOW);
+  digitalWrite(green, LOW);
+  delay(100);  
+  digitalWrite(green, HIGH);
   delay(100);
+  digitalWrite(green, LOW);
+  delay(100);  
+  digitalWrite(green, HIGH);
+  delay(100);
+  digitalWrite(green, LOW);
+  delay(100);
+  
 }
